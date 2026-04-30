@@ -1,10 +1,8 @@
 async function processFile() {
-  alert("JS cargado");
   const file = document.getElementById("fileInput").files[0];
   const mode = document.getElementById("mode").value;
   const resultDiv = document.getElementById("result");
 
-  // Validación
   if (!file) {
     alert("Sube un archivo primero");
     return;
@@ -18,12 +16,11 @@ async function processFile() {
     const response = await fetch("https://qqpmdk-3000.csb.app/process", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ text, mode })
+      body: JSON.stringify({ text, mode }),
     });
 
-    // Si el backend falla
     if (!response.ok) {
       throw new Error("Error en el servidor");
     }
@@ -34,6 +31,6 @@ async function processFile() {
 
   } catch (error) {
     console.error(error);
-    resultDiv.innerHTML = "❌ Error al procesar. Revisa la consola (F12)";
+    resultDiv.innerHTML = "❌ Error al procesar";
   }
 }
