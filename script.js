@@ -6,6 +6,7 @@ async function processFile() {
   // Validación
   if (!file) {
     alert("Sube un archivo primero");
+    alert("JS cargado");
     return;
   }
 
