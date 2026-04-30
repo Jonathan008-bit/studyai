@@ -1,18 +1,38 @@
 async function processFile() {
   const file = document.getElementById("fileInput").files[0];
   const mode = document.getElementById("mode").value;
+  const resultDiv = document.getElementById("result");
 
-  const text = await file.text();
+  // Validación
+  if (!file) {
+    alert("Sube un archivo primero");
+    return;
+  }
 
-  const response = await fetch("https://qqpmdk-3000.csb.app/process", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ text, mode }),
-  });
+  try {
+    resultDiv.innerHTML = "Procesando...";
 
-  const data = await response.json();
+    const text = await file.text();
 
-  document.getElementById("result").innerHTML = data.result;
+    const response = await fetch("https://qqpmdk-3000.csb.app/process", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ text, mode })
+    });
+
+    // Si el backend falla
+    if (!response.ok) {
+      throw new Error("Error en el servidor");
+    }
+
+    const data = await response.json();
+
+    resultDiv.innerHTML = data.result;
+
+  } catch (error) {
+    console.error(error);
+    resultDiv.innerHTML = "❌ Error al procesar. Revisa la consola (F12)";
+  }
 }
