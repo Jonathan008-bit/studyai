@@ -24,8 +24,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
       resultDiv.innerHTML += "<br>2️⃣ Backend OK";
 
-      const data = await response.json();
-
+      const textResponse = await response.text();
+console.log(textResponse);
+document.getElementById("result").innerHTML = textResponse;
+      
       resultDiv.innerHTML += "<br>3️⃣ Resultado:<br><br>" + data.result;
 
     } catch (error) {
