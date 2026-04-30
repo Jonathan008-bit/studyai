@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>StudyAI</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>📚 StudyAI</h1>
+
+      <!-- Subir archivo -->
+      <input type="file" id="fileInput" />
+
+      <!-- Seleccionar modo -->
+      <select id="mode">
+        <option value="summary">Resumen</option>
+        <option value="learn">Aprender</option>
+        <option value="quiz">Prueba</option>
+      </select>
+
+      <!-- Botón -->
+      <button onclick="processFile()">Procesar</button>
+
+      <!-- Resultado -->
+      <div id="result">
+        <p>Tu resultado aparecerá aquí...</p>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script src="script.js"></script>
+  </body>
+</html>
