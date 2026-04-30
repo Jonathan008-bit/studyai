@@ -1,4 +1,5 @@
 async function processFile() {
+  alert("JS cargado");
   const file = document.getElementById("fileInput").files[0];
   const mode = document.getElementById("mode").value;
   const resultDiv = document.getElementById("result");
@@ -6,7 +7,6 @@ async function processFile() {
   // Validación
   if (!file) {
     alert("Sube un archivo primero");
-    alert("JS cargado");
     return;
   }
 
