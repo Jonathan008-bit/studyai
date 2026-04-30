@@ -1,27 +1,30 @@
-async function processFile() {
+document.addEventListener("DOMContentLoaded", () => {
+  const button = document.getElementById("processBtn");
   const resultDiv = document.getElementById("result");
 
-  resultDiv.innerHTML = "Procesando...";
+  button.addEventListener("click", async () => {
+    resultDiv.innerHTML = "1️⃣ Iniciando...";
 
-  try {
-    const response = await fetch("https://studyai-backend-yb0s.onrender.com/process", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        text: "Prueba de administración",
-        mode: "summary"
-      })
-    });
+    try {
+      const response = await fetch("https://studyai-backend-yb0s.onrender.com/process", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          text: "La administración organiza recursos",
+          mode: "summary"
+        })
+      });
 
-    const data = await response.json(); // 👈 AQUÍ se define
+      resultDiv.innerHTML += "<br>2️⃣ Respuesta recibida";
 
-    resultDiv.innerHTML =
-      data.result || (data.error + "<br>" + data.detalle);
+      const text = await response.text(); // 👈 CAMBIO CLAVE
 
-  } catch (error) {
-    console.error(error);
-    resultDiv.innerHTML = "❌ ERROR: " + error.message;
-  }
-}
+      resultDiv.innerHTML += "<br>3️⃣ Contenido:<br><br>" + text;
+
+    } catch (error) {
+      resultDiv.innerHTML = "❌ ERROR: " + error.message;
+    }
+  });
+});
