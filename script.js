@@ -1,36 +1,28 @@
 async function processFile() {
-  const file = document.getElementById("fileInput").files[0];
-  const mode = document.getElementById("mode").value;
   const resultDiv = document.getElementById("result");
 
-  if (!file) {
-    alert("Sube un archivo primero");
-    return;
-  }
+  resultDiv.innerHTML = "1️⃣ Iniciando...";
 
   try {
-    resultDiv.innerHTML = "Procesando...";
-
-    const text = await file.text();
-
     const response = await fetch("https://qqpmdk-3000.csb.app/process", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/json"
       },
-      body: JSON.stringify({ text, mode }),
+      body: JSON.stringify({
+        text: "La administración organiza recursos",
+        mode: "summary"
+      })
     });
 
-    if (!response.ok) {
-      throw new Error("Error en el servidor");
-    }
+    resultDiv.innerHTML += "<br>2️⃣ Conectado al backend";
 
     const data = await response.json();
 
-    resultDiv.innerHTML = data.result;
+    resultDiv.innerHTML += "<br>3️⃣ Respuesta recibida<br><br>" + data.result;
 
   } catch (error) {
     console.error(error);
-    resultDiv.innerHTML = "❌ Error al procesar";
+    resultDiv.innerHTML = "❌ ERROR: " + error.message;
   }
 }
