@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resultDiv.innerHTML = "1️⃣ Iniciando...";
 
     try {
-      const response = await fetch("https://qqpmdk-3000.csb.app/process", {
+      const response = await fetch("https://studyai-backend-yb0s.onrender.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
