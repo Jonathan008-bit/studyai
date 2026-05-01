@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       const text = await file.text();
 
-      const response = await fetch("https://studyai-backend-yb0s.onrender.com", {
+      const response = await fetch("https://studyai-backend-yb0s.onrender.com/process", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
