@@ -1,27 +1,35 @@
-async function processFile() {
-  const resultDiv = document.getElementById("result");
+document.addEventListener("DOMContentLoaded", () => {
+  const button = document.getElementById("processBtn");
+  const result = document.getElementById("result");
 
-  resultDiv.innerHTML = "Procesando...";
+  button.addEventListener("click", async () => {
+    const file = document.getElementById("fileInput").files[0];
+    const mode = document.getElementById("mode").value;
 
-  try {
-    const response = await fetch("https://studyai-backend-yb0s.onrender.com/process", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        text: "Prueba de administración",
-        mode: "summary"
-      })
-    });
+    if (!file) {
+      result.innerHTML = "Sube un archivo primero";
+      return;
+    }
 
-    const data = await response.json(); // 👈 AQUÍ se define
+    result.innerHTML = "Procesando...";
 
-    resultDiv.innerHTML =
-      data.result || (data.error + "<br>" + data.detalle);
+    try {
+      const text = await file.text();
 
-  } catch (error) {
-    console.error(error);
-    resultDiv.innerHTML = "❌ ERROR: " + error.message;
-  }
-}
+      const response = await fetch("https://TU-BACKEND.onrender.com/process", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ text, mode })
+      });
+
+      const data = await response.json();
+
+      result.innerHTML = data.result;
+
+    } catch (error) {
+      result.innerHTML = "❌ Error: " + error.message;
+    }
+  });
+});
