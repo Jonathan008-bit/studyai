@@ -1,34 +1,46 @@
 document.addEventListener("DOMContentLoaded", () => {
   const button = document.getElementById("processBtn");
   const result = document.getElementById("result");
+  const fileInput = document.getElementById("fileInput");
+  const modeSelect = document.getElementById("mode");
 
   button.addEventListener("click", async () => {
-    const file = document.getElementById("fileInput").files[0];
-    const mode = document.getElementById("mode").value;
+    const files = fileInput.files;
+    const mode = modeSelect.value;
 
-    if (!file) {
-      result.innerHTML = "Sube un archivo primero";
+    if (files.length === 0) {
+      result.innerHTML = "⚠️ Sube al menos un archivo primero";
       return;
     }
 
-    result.innerHTML = "Procesando...";
+    result.innerHTML = "Procesando contenido... ⏳";
+
+    // --- CAMBIO CLAVE AQUÍ ---
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append("files", files[i]); // "files" debe coincidir con el backend
+    }
+    formData.append("mode", mode);
 
     try {
-      const text = await file.text();
-
-      const response = await fetch("https://studyai-backend-yb0s.onrender.com/process/", {
+      const response = await fetch("https://studyai-backend-yb0s.onrender.com/process", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ text, mode })
+        // NOTA: Al usar FormData NO debes poner el Header "Content-Type"
+        body: formData 
       });
 
-      const data = await response.json();
+      if (!response.ok) {
+        const error Text = await response.text();
+        console.error("Respuesta del servidor:", errorText);
+        throw new Error("El servidor respondió con error");
+      }
 
-      result.innerHTML = data.result;
+      const data = await response.json();
+      // Usamos innerHTML y reemplazamos saltos de línea para que se vea bien
+      result.innerHTML = data.result ? data.result.replace(/\n/g, "<br>") : "Sin respuesta";
 
     } catch (error) {
+      console.error("Error detallado:", error);
       result.innerHTML = "❌ Error: " + error.message;
     }
   });
