@@ -1,36 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <title>StudyAI</title>
+<head>
+  <meta charset="UTF-8">
+  <title>StudyAI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="container">
-      <h1>📚 StudyAI</h1>
+<body>
+  <div class="container">
+    <h1>📚 StudyAI</h1>
 
-      <!-- Subir archivo -->
-      <input type="file" id="fileInput" />
+    <input type="file" id="fileInput">
 
-      <!-- Seleccionar modo -->
-      <select id="mode">
-        <option value="summary">Resumen</option>
-        <option value="learn">Aprender</option>
-        <option value="quiz">Prueba</option>
-      </select>
+    <select id="mode">
+      <option value="summary">Resumen</option>
+      <option value="learn">Aprender</option>
+      <option value="quiz">Prueba</option>
+    </select>
 
-      <!-- Botón -->
-      <button id="processBtn">Procesar</button>
+    <button id="processBtn">Procesar</button>
 
-      <!-- Resultado -->
-      <div id="result">
-        <p>Tu resultado aparecerá aquí...</p>
-      </div>
-    </div>
+    <div id="result">Tu resultado aparecerá aquí...</div>
+  </div>
 
-    <!-- JS -->
-    <script src="script.js?v=6"></script>
-  </body>
+  <script src="script.js?v=1"></script>
+</body>
 </html>
