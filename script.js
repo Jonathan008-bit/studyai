@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (!response.ok) {
-        const error Text = await response.text();
+        const errorText = await response.text();
         console.error("Respuesta del servidor:", errorText);
         throw new Error("El servidor respondió con error");
       }
